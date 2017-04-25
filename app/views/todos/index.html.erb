@@ -1,11 +1,15 @@
-<h1>Listing all Todos</h1>
-<p>
-  <%= link_to "Create a Todo", new_todo_path %>
-</p>
-<table>
-  <tr>
+<div class="jumbotron center">
+    <h1>Listing all Todos</h1>
+    <p>
+    <%= link_to "Create a Todo", new_todo_path, class: "btn btn-danger btn-lg btn-xlarge" %>
+    </p>
+    <table class="table">
+    <tr>
     <th>Name</th>
     <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
     </tr>
     <% @todos.each do |todo| %>
     <tr>
@@ -16,4 +20,6 @@
       <td><%= link_to "Delete", todo_path(todo), method: :delete, data: {confirm: "Are you sure?"} %> </td>
     </tr>
     <% end %>
-</table>
+  </table>
+</div>
+

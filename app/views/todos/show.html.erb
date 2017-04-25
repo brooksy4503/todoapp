@@ -1,11 +1,11 @@
+<div class="jumbotron center">
 <h1>Showing a Todo</h1>
-
-<p>
-  name: <%= @todo.name %>
-</p>
-<p>
-  description: <%= @todo.description %>
-</p>
-
+<h2>
+  Name: <%= @todo.name %>
+</h2>
+<h2>
+  Description: <%= @todo.description %>
+</h2>
 <%= link_to "Edit this todo", edit_todo_path(@todo)%> |
 <%= link_to "Back to todos listing", todos_path %>
+</div>
