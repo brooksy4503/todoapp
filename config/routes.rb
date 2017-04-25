@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get "/help", to: 'pages#help'
   
   resources :todos
+  resources :users
 end

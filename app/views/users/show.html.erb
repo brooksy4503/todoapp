@@ -1,0 +1,11 @@
+<div class="jumbotron center">
+<h1>User Profile</h1>
+<h2>
+  Name: <%= @user.name %>
+</h2>
+<h2>
+  Email: <%= @user.email %>
+</h2>
+<%= link_to "Edit this user profile", edit_user_path(@user)%> |
+<%= link_to "Back to users listing", users_path %>
+</div>
