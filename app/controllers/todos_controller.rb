@@ -1,12 +1,15 @@
 class TodosController < ApplicationController
 before_action :set_todo, only: [:edit, :update, :show, :destroy]
+before_action :require_user, except:[:index]
+before_action :require_same_user, only:[:edit,:update,:destroy]
 
 def new
   @todo = Todo.new  
 end
 
 def create
-  @todo = Todo.new(todo_params)  
+  @todo = Todo.new(todo_params)
+  @todo.user = current_user
   if @todo.save
     flash[:notice] = "Todo was created successfully!"
   redirect_to todo_path(@todo)
@@ -52,4 +55,12 @@ end
 def todo_params
   params.require(:todo).permit(:name, :description)
 end
+
+def require_same_user
+  if current_user != @todo.user
+    flash[:danger] = "You can only edit and delete your own todos"
+    redirect_to todos_path
+  end
+end
+
 end
