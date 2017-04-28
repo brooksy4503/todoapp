@@ -1,8 +1,11 @@
 <div class="jumbotron center">
     <h1>Listing all Users</h1>
     <p>
-    <%= link_to "Create a User", new_user_path, class: "btn btn-danger btn-lg btn-xlarge" %>
+    <%= link_to "Signup", signup_path, class: "btn btn-danger btn-lg btn-xlarge" %>
     </p>
+    <div align="center">
+    <%= will_paginate %>
+    </div>
     <table class="table">
     <tr>
     <th>Name</th>
@@ -21,4 +24,7 @@
     </tr>
     <% end %>
   </table>
+  <div align="center">
+  <%= will_paginate %>
+  </div>
 </div>

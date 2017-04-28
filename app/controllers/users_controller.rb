@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 before_action :set_user, only: [:edit, :update, :show, :destroy]
-before_action :require_same_user, only: [:edit, :update, :destroy]
+before_action :require_same_user, only: [:edit, :update, :show, :destroy]
 
 def new
   @user = User.new
@@ -18,7 +18,7 @@ def create
 end
 
 def show
-  
+    @user_todos = @user.todos.paginate(page: params[:page], per_page: 5)
 end
 
 def edit
@@ -36,7 +36,8 @@ def update
 end
 
 def index
-  @users = User.all
+  # @users = User.all
+  @users = User.paginate(page: params[:page], per_page: 5)
 end
 
 def destroy

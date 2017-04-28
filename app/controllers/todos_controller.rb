@@ -37,7 +37,8 @@ def update
 end
 
 def index
-  @todos = Todo.all
+  # @todos = Todo.all
+  @todos = Todo.paginate(page: params[:page], per_page: 5)
 end
 
 def destroy
