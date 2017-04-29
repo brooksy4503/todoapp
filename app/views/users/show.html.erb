@@ -6,6 +6,17 @@
 <h2>
   Email: <%= @user.email %>
 </h2>
-<%= link_to "Edit this user profile", edit_user_path(@user)%> |
-<%= link_to "Back to users listing", users_path %>
+<p><%= link_to "Edit this user profile", edit_user_path(@user)%></p>
+<p><%= link_to "Create a Todo", new_todo_path, class: "btn btn-danger btn-lg btn-xlarge" %></p>
+</div>
+
+<div class="jumbotron center">
+<h2 align="center"><%= @user.name %>'s Todos</h2>
+<div align="center">
+<%= will_paginate @user_todos%>  
+</div>
+<%= render 'todos/todos', obj: @user_todos %>
+<div align="center">
+<%= will_paginate @user_todos%>  
+</div>
 </div>

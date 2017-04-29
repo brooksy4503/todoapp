@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 before_action :set_user, only: [:edit, :update, :show, :destroy]
-before_action :require_same_user, only: [:edit, :update, :show, :destroy]
+before_action :require_same_user, only: [:edit, :update,  :destroy]
+before_action :require_admin, only: [:destroy]
 
 def new
   @user = User.new
@@ -11,9 +12,9 @@ def create
   if @user.save
     session[:user_id] = @user.id
     flash[:notice] = "Your Profile was created successfully!"
-  redirect_to user_path(@user)
+    redirect_to user_path(@user)
   else
-  render 'new'
+    render 'new'
   end
 end
 
@@ -57,6 +58,14 @@ def require_same_user
     flash[:danger] = "You can only edit and delete your own account"
     redirect_to users_path
   end
+end
+
+def require_admin
+    if logged_in? && !current_user.admin? && !user.admin?
+      flash[:danger] = "Only admin users can perform that action"
+      redirect_to root_path
+      
+    end
 end
   
 end
