@@ -7,5 +7,10 @@
   Description: <%= @todo.description %>
 </h2>
 <%= link_to "Edit this todo", edit_todo_path(@todo)%> |
+<% if logged_in? %>
+<%= link_to "Back to todos listing", user_path(current_user) %>
+<% else %>
 <%= link_to "Back to todos listing", todos_path %>
+<% end %>
+
 </div>

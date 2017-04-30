@@ -11,7 +11,7 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
     @todo.user = current_user
     if @todo.save
-      flash[:notice] = "Todo was created successfully!"
+      flash[:success] = "Todo was created successfully!"
     redirect_to todo_path(@todo)
     else
     render 'new'
@@ -19,7 +19,7 @@ class TodosController < ApplicationController
   end
   
   def show
-    
+
   end
   
   def edit
@@ -28,7 +28,7 @@ class TodosController < ApplicationController
   
   def update
     if @todo.update(todo_params)
-      flash[:notice] = "Todo was successfully updated"
+      flash[:success] = "Todo was successfully updated"
       redirect_to todo_path(@todo)
     else
       render 'edit'
@@ -42,7 +42,7 @@ class TodosController < ApplicationController
   
   def destroy
     @todo.destroy
-    flash[:notice] = "Todo was deleted successfully"
+    flash[:success] = "Todo was deleted successfully"
     redirect_to todos_path
   end
   
@@ -56,7 +56,7 @@ class TodosController < ApplicationController
   end
   
   def require_same_user
-    if current_user != @todo.user
+    if current_user != @todo.user and !current_user.admin?
       flash[:danger] = "You can only edit and delete your own todos"
       redirect_to todos_path
     end

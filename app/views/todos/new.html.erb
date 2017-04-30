@@ -1,5 +1,9 @@
 <div class="jumbotron center">
 <h1>Create a new Todo</h1>
 <%= render 'form' %>
+<% if logged_in? %>
+<%= link_to "Back to todos listing", user_path(current_user) %>
+<% else %>
 <%= link_to "Back to todos listing", todos_path %>
+<% end %>
 </div>

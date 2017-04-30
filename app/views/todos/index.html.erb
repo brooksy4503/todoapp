@@ -18,9 +18,11 @@
     <tr>
       <td><%= todo.name %></td>
       <td><%= todo.description %></td>
+      <% if logged_in? && (current_user == todo.user || current_user.admin?)%>
       <td><%= link_to "Edit", edit_todo_path(todo) %></td>
       <td><%= link_to "Show", todo_path(todo) %></td>
       <td><%= link_to "Delete", todo_path(todo), method: :delete, data: {confirm: "Are you sure?"} %> </td>
+      <% end %>
     </tr>
     <% end %>
   </table>

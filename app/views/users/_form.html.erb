@@ -1,13 +1,4 @@
-<% if @user.errors.any? %>
-<h2>
-  The Following errors prevented the todo from being saved
-</h2>
-<ul>
-  <% @user.errors.full_messages.each do |msg| %>
-  <li><%= msg %> </li>
-  <% end %>
-</ul>
-<% end %>
+<%= render 'shared/errors', obj: @user %>
 <%= form_for @user do |f| %>
 <p>
   <%= f.label :name %> <br>
