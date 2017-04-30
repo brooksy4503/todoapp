@@ -42,7 +42,11 @@ def index
 end
 
 def destroy
-
+    if !@user.admin?
+      @user.destroy
+      flash[:danger] = "Chef and all associated recipes have been deleted"
+      redirect_to users_path
+    end
 end
 
 private
