@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 before_action :set_user, only: [:edit, :update, :show, :destroy]
 before_action :require_same_user, only: [:edit, :update,  :destroy]
 before_action :require_admin, only: [:destroy]
+before_action :require_user
 
 def new
   @user = User.new
@@ -20,6 +21,7 @@ end
 
 def show
     @user_todos = @user.todos.paginate(page: params[:page], per_page: 5)
+    # @user_todos = Todo.where(user_id: @user.id).paginate(page: params[:page], per_page: 5)
 end
 
 def edit
@@ -38,7 +40,14 @@ end
 
 def index
   # @users = User.all
+  if current_user.admin?
   @users = User.paginate(page: params[:page], per_page: 5)
+  else
+  @users = User.where(id: current_user.id).paginate(page: params[:page], per_page: 5)
+  end
+   
+
+  
 end
 
 def destroy

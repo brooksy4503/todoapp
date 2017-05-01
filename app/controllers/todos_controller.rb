@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [:edit, :update, :show, :destroy]
-  before_action :require_user, except:[:index]
+  before_action :require_user
   before_action :require_same_user, only:[:edit,:update,:destroy]
   
   def new
@@ -37,7 +37,13 @@ class TodosController < ApplicationController
 
   def index
     # @todos = Todo.all
+    # @todos = Todo.paginate(page: params[:page], per_page: 5)
+    if current_user.admin? 
     @todos = Todo.paginate(page: params[:page], per_page: 5)
+    else
+    @todos = Todo.where(user_id: current_user.id).paginate(page: params[:page], per_page: 5)
+    # this code filters only the current users todos and not anyone elses
+    end
   end
   
   def destroy
