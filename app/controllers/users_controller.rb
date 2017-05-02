@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 before_action :set_user, only: [:edit, :update, :show, :destroy]
 before_action :require_same_user, only: [:edit, :update,  :destroy]
 before_action :require_admin, only: [:destroy]
-before_action :require_user
+before_action :require_user, except: [:new, :create]
 
 def new
   @user = User.new
